@@ -1,0 +1,99 @@
+/*
+StringsFirstAssignment Part3
+*/
+public class Part3 {
+	
+	public void testing () {
+		
+		//This method should call twoOccurrences on several pairs of strings 
+		//and print the strings and the result of calling twoOccurrences (true or false) for each pair. 
+		//Be sure to test examples that should result in true and examples that should result in false.
+		String [] searching = new String [2];
+		String [] result = new String [2];
+		searching[0] = "A story by Abby Long";
+		searching[1] =  "banana"; 
+		result[0] = "by";
+		result[1] = "an";
+		for(String search: searching) {
+			for(String rst : result) {
+				//boolean myRes = twoOccurrences(rst, search);
+				//System.out.println("The search results are: " + myRes);
+				lastPart(rst, search);
+				
+			}
+			
+		}
+	}
+
+	public boolean twoOccurrences(String stringa, String stringb) {
+		boolean exist = false;
+		String result = "";
+		int startIndex = stringb.indexOf(stringa);
+		int count = 0;
+		int stopIndex =0;
+		//first verify that by exists in the string indexOf(“by”) != -1
+		while(stringb.indexOf(stringa) != -1) {
+			if(stopIndex ==-1) {
+				break;
+			}
+			System.out.println("exist");
+			System.out.println("the start index is: " + startIndex );
+
+			stopIndex = stringb.indexOf(stringa, startIndex + stringa.length());
+			System.out.println("the stopIndex index is: " + stopIndex );
+
+			//find the next substring by starting after the first substring(“by”, first position+3)
+			
+			//result = stringb.substring(startIndex, stopIndex);
+			startIndex = stopIndex;
+			
+			count++;
+			
+		}
+		if(count >=2) {
+			System.out.println("The total count for " + stringa + " is" + count);
+
+			return exist = true;	
+		}else
+		{return exist = false;
+		}
+	}
+	
+	public String lastPart(String stringa, String stringb ) {
+		boolean exist = false;
+		String result = "";
+		int startIndex = stringb.indexOf(stringa);
+		int count = 0;
+		int stopIndex =0;
+		//first verify that by exists in the string indexOf(“by”) != -1
+		if(stringb.indexOf(stringa) != -1) {
+			System.out.println("exist");
+			System.out.println("the start index is: " + startIndex );
+
+			stopIndex = stringb.indexOf(stringa, startIndex + stringa.length());
+			System.out.println("the stopIndex index is: " + stopIndex );
+
+			//find the next substring by starting after the first substring(“by”, first position+3)
+			
+			result = stringb.substring(startIndex+stringa.length());
+			startIndex = stopIndex;
+			System.out.println("The part of the string after " +  stringa + " " + "in " + stringb + " " + "is: " + result);
+
+			count++;
+			return result;
+			
+		}else {
+			System.out.println("the substring is: " + stringb );
+			return stringb;
+		}
+		}
+	
+	public static void main(String [] args) {
+		Part3 tesSample = new Part3();
+		boolean myRes = tesSample.twoOccurrences("abc", "abcdkfjsksioehgjfhsdjfhksdfhuwabcabcajfieowj");
+		//System.out.println(myRes);
+		//tesSample.testing();
+		//tesSample.lastPart("zoo", "“forest");
+		
+	}
+}

@@ -1,0 +1,83 @@
+/*
+StringsFirstAssignment Part2
+*/
+public class Part2 {
+
+public String findSimpleGene (String dna, int startCodon, int stopCodon ) {
+	String dnaFound = "";
+	System.out.println("The startCodon value is: " + startCodon);
+	System.out.println("The stopCodon value is: " + stopCodon);
+
+	String dnaString = "";
+		//If the length of the substring between the “ATG” and “TAA” is a multiple of 3, 
+//then return the substring that starts with that “ATG” and ends with that “TAA”.
+
+if(dna.substring(startCodon +3, stopCodon).length() % 3 == 0) {
+	dnaString = dna.substring(0) ;
+	//dnaFound = dna.substring(startCodon);
+	//System.out.println("The gene found is: " + dnaFound);
+}else 
+	{
+	return "";
+	}
+return dnaString;
+	
+	}
+
+	
+public void testSimpleGene () {
+	String required = "";
+	int startCodon =0;
+	int stopCodon =0;
+	String dnaSamp = "";
+	int count =0;
+	String [] dnaSamples = new String [5];
+	dnaSamples [0] = "GCTTAACCGTGACCTTAACGGA";
+	dnaSamples [1] = "ATGCCGGTATTCGAGCGGTG";
+	dnaSamples [2] = "GCCCGTCCGGCGCTCGCCGT";
+	dnaSamples [3] = "CCGATGCGTCCGTAAACCTG";
+	dnaSamples [4] = "TTTATGACGTGTAAAGGCT";
+
+		for(int j =0; j<dnaSamples.length;j++) {
+			dnaSamp = dnaSamples[j].toLowerCase();
+			if (dnaSamp.indexOf("atg") != -1) {
+				startCodon  = dnaSamp.indexOf("atg");
+				if (dnaSamp.indexOf("taa") != -1) {
+					stopCodon  = dnaSamp.indexOf("taa", startCodon);
+					String ourDNAGene = findSimpleGene(dnaSamp, startCodon, stopCodon);
+					System.out.println("The gene found is: " + ourDNAGene);
+					
+			}
+		}
+				
+				
+	}
+		for(int j =0; j<dnaSamples.length;j++) {
+			required = dnaSamples[j];
+			if (required.indexOf("ATG") != -1) {
+				startCodon  = dnaSamp.indexOf("ATG");
+				if (required.indexOf("TAA") != -1) {
+					stopCodon  = required.indexOf("TAA", startCodon);
+					String ourDNAGene = findSimpleGene(required, startCodon, stopCodon);
+					System.out.println("The gene found is: " + ourDNAGene);
+					
+			}
+		}
+				
+				
+	}
+		
+		
+}
+	
+
+public static void main (String [] args) {
+	
+	Part2 printDnaSamples = new Part2();
+	printDnaSamples.testSimpleGene();
+	
+
+}
+	
+
+}

@@ -1,0 +1,92 @@
+/*
+StringsFirstAssignment Part4
+*/
+
+import java.io.*;
+import java.net.*;
+public class Part4 {
+	String mainString;
+	
+
+	
+	public boolean twoOccurrences(String stringa, String stringb) {
+		//mainString = stringa.equalsIgnoreCase(stringa);
+		boolean exist = false;
+		String result = "";
+		int startIndex = stringb.indexOf(stringa);
+
+		int count = 0;
+		int stopIndex =0;
+		//first verify that by exists in the string indexOf(“by”) != -1
+		while(stringb.toLowerCase().indexOf(stringa) != -1) {
+			int startIndexOfQuote = stringb.indexOf("\"");
+			int pos = stringb.indexOf(stringa);
+			int lastIndexOfQuote = stringb.lastIndexOf("\"");
+			
+			int beg = stringb.indexOf("\"",pos-9);
+			int end = stringb.indexOf("\"", pos+1);
+
+			//System.out.println("The index position of the first quotation mark is: " + startIndexOfQuote);
+			//System.out.println("The last index position of the second quotation mark is: " + lastIndexOfQuote);
+
+			if(stopIndex ==-1) {
+				break;
+			}
+			System.out.println("exist");
+			System.out.println("the start index is: " + startIndex );
+
+			stopIndex = stringb.indexOf(stringa, lastIndexOfQuote - startIndexOfQuote);
+			//System.out.println("the stopIndex index is: " + stopIndex );
+
+			//find the next substring by starting after the first substring(“by”, first position+3)
+			
+			System.out.println(stringb.substring(beg+1,end));
+
+			
+			//result = stringb.substring(startIndexOfQuote, lastIndexOfQuote + 1);
+			//System.out.println("the result is: " + result );
+
+			//startIndex = stopIndex;
+			
+			count++;
+			
+		}
+		if(count >=2) {
+			System.out.println("The total count for " + stringa + " is" + count);
+
+			return exist = true;	
+		}else
+		{return exist = false;
+		}
+	}
+	
+	public String myUrlResources (String uRL) throws IOException {
+        FileInputStream in;
+        URL eduDuke = new URL(uRL);
+
+        InputStreamReader ir = new InputStreamReader(eduDuke.openStream());
+        BufferedReader br = new BufferedReader(ir);
+        String inputLine;
+        while ((inputLine = br.readLine()) != null)
+        	System.out.println(inputLine);
+
+			//twoOccurrences("youtube.com", inputLine);
+
+        br.close();
+        return inputLine;
+        }
+	
+	public static void main(String [] args) {
+		Part4 callUrlResources = new Part4();
+		try
+		{
+			String youTubeLink = callUrlResources.myUrlResources("https://app.slack.com/client/T015K1W04H5/C017ST9J97A");
+
+			}
+		catch (IOException ioe)
+		{
+			ioe.printStackTrace();
+			}
+
+		}
+}

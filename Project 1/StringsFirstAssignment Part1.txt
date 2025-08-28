@@ -1,0 +1,71 @@
+/*
+StringsFirstAssignment Part1
+*/
+public class Part1 {
+/*		String dnaWithNoATG = "GCTTAACCGTGACCTTAACGGA";
+		String dnaWithNoTAA = "ATGCCGGTATTCGAGCGGTG";
+		String dnaWithNoATGOrTAA = "GCCCGTCCGGCGCTCGCCGT";
+		String dnaWithValidGene = "CCGATGCGTCCGTAAACCTG";
+		String dnaWithAtgTaaNotValid  = "TTTATGACGCTGTAAAGGCT";*/
+
+	public String findSimpleGene (String dna) {
+		String theSubString = "";
+		int startcodon =0;
+		int stopcodon =0;
+		String dnaString = " ";
+		for (int i =0; i<dna.length(); i++ ) {
+			if (dna.indexOf("ATG") != -1) {
+				startcodon  = dna.indexOf("ATG");	
+				//System.out.println("The starting point is: " + startcodon);
+			}else
+				return "";
+			}
+		for(int i =0; i< dna.length(); i++) {
+			if (dna.indexOf("TAA", startcodon) != -1) {
+				
+				stopcodon  = dna.indexOf("TAA",startcodon );
+
+			}else
+				return "";
+		}
+		
+//If the length of the substring between the “ATG” and “TAA” is a multiple of 3, 
+//then return the substring that starts with that “ATG” and ends with that “TAA”.
+
+if(dna.substring(startcodon +3, stopcodon).length() % 3 == 0) {
+	dnaString = dna.substring(0) ;
+	theSubString = dna.substring(startcodon, stopcodon+3);
+	System.out.println("The substring is: " + theSubString);
+	
+}else 
+	{
+	return "";
+	}
+return dnaString;
+	
+	}
+	
+	public void testSimpleGene () {
+		String [] dnaSamples = new String [1];
+		dnaSamples[0] = "AAATGCCCTAACTAGATTAAGAAACC";
+		/*dnaSamples [0] = "GCTTAACCGTGACCTTAACGGA";
+		dnaSamples [1] = "ATGCCGGTATTCGAGCGGTG";
+		dnaSamples [2] = "GCCCGTCCGGCGCTCGCCGT";
+		dnaSamples [3] = "CCGATGCGTCCGTAAACCTG";
+		dnaSamples [4] = "TTTATGACGTGTAAAGGCT";*/
+		for(String dna : dnaSamples) {
+			System.out.println("The DNA Samples are: " +  dna);
+			
+			String ourDNAGene = findSimpleGene(dna);
+			System.out.println("This is the DNA found: " + ourDNAGene);
+			}
+ 	}
+	
+	public static void main (String [] args) {
+		
+		Part1 printDnaSamples = new Part1();
+		printDnaSamples.testSimpleGene();
+		
+
+}
+}
