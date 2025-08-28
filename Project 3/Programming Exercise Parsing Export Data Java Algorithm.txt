@@ -1,0 +1,175 @@
+/**
+ * Reads a chosen CSV file of our preferences and prints each field.
+ * 
+ * @author Duke Software Team
+ */
+import edu.duke.*;
+import org.apache.commons.csv.*;
+import java.io.IOException;
+
+public class FirstCSVExample {
+    /*public void tester () {
+        FileResource fr = new FileResource();
+        CSVParser parser = fr.getCSVParser();
+        for (CSVRecord record : parser){
+            System.out.print(record.get("Name") + " ");
+            System.out.print(record.get("Favorite Color") + " ");
+            System.out.println(record.get("Favorite Food"));
+        }
+    }*/
+    
+    public void tester () throws IOException{
+        String country = "";
+        FileResource fr = new FileResource();
+        String countries = "";
+        CSVParser parser = fr.getCSVParser();
+        String str = "$999999999999999";
+       String exportItem3 = "gold";
+        String exportItem2 = "nuts";
+        String exportItem1 = "fish";
+        String exportItem4 = "cotton";
+        String exportItem5 = "flowers";
+        //countryInfo ();
+        listExportersTwoProducts(parser, exportItem4,exportItem5);
+       // numberOfExporters(parser, exportItem3);
+        //bigExporters (parser, str);
+        /*for (CSVRecord record : parser){
+            /*String [] convert = record.get("Country").split(" ");
+            for(String  myarr : convert){
+            System.out.print(myarr);
+            if(record.get("Country").contains(country)){
+            
+            System.out.print(record.get("Country") + " ");
+            System.out.print(record.get("Exports") + " ");
+            System.out.println(record.get("Value (dollars)"));           
+        }*/
+    }
+    
+    public void countryInfo () throws IOException {
+        
+        FileResource fr = new FileResource();  
+        CSVParser parser = fr.getCSVParser();
+         for (CSVRecord record : parser){
+             //System.out.println("Inside the loop");
+             if(record.get("Country") != null){
+                 int count =0;
+                 String [] lenCountry = new String [record.get("Country").length() -1];
+                String str = lenCountry [count];
+                 for(;count < 3; count++){
+                     //System.out.println("the val of lenCountry is: " + lenCountry.length);
+                     lenCountry[count] =record.get(count);
+                     if(record.get(count).contains("Nauru")){
+
+                     System.out.print(record.get(count) + ": ");
+                     System.out.print(" ");
+                     System.out.print(record.get("Exports") + " ");
+                     System.out.print(":");
+                     System.out.print(" ");
+                     System.out.println(record.get("Value (dollars)"));
+
+                                          
+                   }
+                }
+            }
+        }
+    }
+    
+    
+    
+    public void listExportersTwoProducts(CSVParser parser,  String exportItem1, String exportItem2){
+    FileResource fr = new FileResource();        
+         parser = fr.getCSVParser();
+         for (CSVRecord record : parser){
+             //System.out.println("Inside the loop");
+             if(record.get("Country") != null){
+                 int count =0;
+                 String [] lenCountry = new String [record.get("Country").length() -1];
+                String str = lenCountry [count];
+                 for(;count < 3; count++){
+                     //System.out.println("the val of lenCountry is: " + lenCountry.length);
+                     lenCountry[count] =record.get(count);
+                     if(record.get(count).contains(exportItem1) && record.get(count).contains(exportItem2)){
+
+                     System.out.println(record.get("Country"));
+                                                            
+                   }
+                }
+            }
+        }
+    }
+    
+    public int numberOfExporters(CSVParser parser, String exportItem){
+    int numBer = 0;
+    FileResource fr = new FileResource();
+
+         //File csvData = new File("C:\\Users\\Maxwell\\Downloads\\exports\\exports\\exportdata.csv");
+         
+         parser = fr.getCSVParser();
+         for (CSVRecord record : parser){
+             //System.out.println("Inside the loop");
+             if(record.get("Country") != null){
+                 int count =0;
+                 String [] lenCountry = new String [record.get("Country").length() -1];
+                String str = lenCountry [count];
+                 for(;count < 3; count++){
+                     //System.out.println("the val of lenCountry is: " + lenCountry.length);
+                     lenCountry[count] =record.get(count);
+                     if(record.get(count).contains(exportItem)){
+                         System.out.println("The countries are: " + record.get("Country"));
+                         numBer++;// = record.get("Country").length();
+                                                            
+                   }
+                }
+            }
+        }
+    System.out.println("The number of expoters is: " + numBer);
+    return numBer;
+    }
+    
+    public void bigExporters (CSVParser parser, String $999999999999999){
+        int numBer = 0;
+    FileResource fr = new FileResource();
+
+         //File csvData = new File("C:\\Users\\Maxwell\\Downloads\\exports\\exports\\exportdata.csv");
+         
+         parser = fr.getCSVParser();
+         for (CSVRecord record : parser){
+             //System.out.println("Inside the loop");
+             if(record.get("Country") != null){
+                 int count =0;
+                 String [] lenCountry = new String [record.get("Country").length() -1];
+                String str = lenCountry [count];
+                 for(;count < 3; count++){
+                     //System.out.println("the val of lenCountry is: " + lenCountry.length);
+                     lenCountry[count] =record.get(count);
+                     if(record.get("Value (dollars)").length() > $999999999999999.length()){
+                         System.out.println("The countries are: " + record.get("Country") + " ");
+                         System.out.print(record.get("Value (dollars)"));                                                             
+                   }
+                }
+            }
+        }
+   
+    }
+         
+    public static void main(String [] args){
+        FirstCSVExample countryRecords = new FirstCSVExample();
+        //countryRecords.countryInfo();
+        FileResource fr = new FileResource();
+
+        CSVParser parser = fr.getCSVParser();
+        String exportItem4 = "cotton";
+        String exportItem5 = "flowers";
+        String exportItem6 = "cocoa";
+
+ 
+
+        //countryRecords.listExportersTwoProducts(parser,  exportItem4, exportItem5);
+        //countryRecords.numberOfExporters(parser, exportItem6);
+        String str = "$999999999999999";
+        //"Albania"
+        countryRecords.bigExporters(parser, str);
+    
+    }
+        
+    }
