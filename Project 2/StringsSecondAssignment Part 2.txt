@@ -1,0 +1,83 @@
+
+public class Part2 {
+	
+	public int positive(String dna, int startPos, int pos) {
+		int count =0;
+		String newDna = "GCTTAACCGTGACCTTAACGGA";
+		while (count < 3) {
+			  count += 1;
+			 newDna = newDna + dna.substring(startPos,pos);
+			  startPos = pos+1;
+			  pos = dna.indexOf("T", startPos);
+			  if (pos == -1) {
+			    break;
+			  }
+			}
+		return count;
+	}
+
+	public int howMany (String stringa, String stringb) {
+		
+			int exist = 0;
+			String result = "";
+			int startIndex = stringb.indexOf(stringa);
+			int count = 0;
+			int stopIndex =0;
+			//first verify that by exists in the string indexOf(“by”) != -1
+			while(stringb.indexOf(stringa) != -1) {
+				if(stopIndex ==-1) {
+					break;
+				}
+				System.out.println("exist");
+				System.out.println("the start index is: " + startIndex );
+
+				stopIndex = stringb.indexOf(stringa, startIndex + stringa.length());
+				System.out.println("the stopIndex index is: " + stopIndex );
+
+				//find the next substring by starting after the first substring(“by”, first position+3)
+				
+				//result = stringb.substring(startIndex, stopIndex);
+				startIndex = stopIndex;
+				
+				count++;
+				
+			}
+			if(count >=2) {
+				System.out.println("The total count for " + stringa + " is" + count);
+
+				return exist = count;	
+			}else
+			{return exist = 0;
+			}
+		}
+	
+	public void testHowMany () {
+			
+			//This method should call twoOccurrences on several pairs of strings 
+			//and print the strings and the result of calling twoOccurrences (true or false) for each pair. 
+			//Be sure to test examples that should result in true and examples that should result in false.
+			String [] searching = new String [2];
+			String [] result = new String [2];
+			searching[0] = "A story by Abby Long";
+			searching[1] =  "banana"; 
+			result[0] = "by";
+			result[1] = "an";
+			for(String search: searching) {
+				for(String rst : result) {
+					//boolean myRes = twoOccurrences(rst, search);
+					//System.out.println("The search results are: " + myRes);
+					howMany(rst, search);
+					
+				}
+				
+			}
+		}
+	public static void main(String [] args) {
+		Part2 counting = new Part2();
+		//counting.howMany("AA", "ATAAAA");
+		//counting.testHowMany();
+		counting.positive("GCTTAACCGTGACCTTAACGGAATGCCGGTATTCTGAGCGGTGCCGATGCGTCCGTAAACCTGGCCCATGTCCGGCGCTTAGCGCCGT", 0, 0);
+
+		
+	}
+}

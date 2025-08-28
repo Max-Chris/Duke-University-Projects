@@ -1,0 +1,163 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Part3 {
+	
+	
+	public int findStopCodon (String dna, String stopCodon, int startIndex) {
+		//System.out.println("The index of startIndex is: " + startIndex);
+		startIndex = dna.indexOf("ATG");
+		//System.out.println("The new value of index for startIndex is: " + startIndex);
+		int count =0;
+		String theSubString = "";
+		int indexFirstOccuStopCodon =0;
+		//String parameter named dna, an integer parameter named startIndex that represents 
+		//where the first occurrence of ATG occurs in dna, and a String parameter named stopCodon. 
+		//This method returns the index of the first occurrence of stopCodon 
+		//that appears past startIndex and is a multiple of 3 away from startIndex. 
+		//If there is no such stopCodon, this method returns the length of the dna strand.
+		
+		//stopCodon = dna.substring(startIndex, startIndex);
+		
+		int currIndex = dna.indexOf(stopCodon, startIndex+3);
+		
+		//int distance = currIndex - startIndex;
+		
+		//System.out.println("the distance of currIndex is: " + currIndex);
+		//System.out.println("the stopCodon is: " + dna.substring(currIndex, currIndex+3));
+		//System.out.println("the distance is: " + dna.indexOf(currIndex - startIndex));
+
+		int nextStopCodonIndex = 0;
+
+		if(currIndex == -1) {
+			return -1;
+			
+			
+		}else if(dna.substring(startIndex, currIndex).length() % 3 ==0) {
+			theSubString = dna.substring(startIndex, currIndex+3);
+			System.out.println("The gene found is: " + theSubString);
+			
+			currIndex = dna.indexOf(stopCodon, currIndex);
+			count++;
+			
+			//System.out.println("The stopCodon again is: " + dna.substring(currIndex,currIndex +3));
+
+		}else {
+			return dna.substring(0).length();
+			
+			//xtStopCodonIndex = dna.indexOf(stopCodon, indexStopCodon +1);
+			
+		}
+		//System.out.println("the total number of gene is: " + count);
+		
+		return count;
+
+	}
+
+	
+	public int findGene (String dna) {
+		int count =0;
+		ArrayList<Integer> in = new ArrayList<Integer>(); // Create an ArrayList object
+		int currDist = 0;
+
+		String [] codOns = new String [3];
+		codOns[0] = "TAA";
+		codOns[1] = "TAG";
+		codOns[2] = "TGA";
+		//dna = "GCTTAACCGTGACCTTAACGGAATGCCGGTATTCTGAGCGGTG";
+		String theSubString = "";
+		int startcodon =0;
+		int stopcodon =0;
+		String dnaString = " ";
+		for (int i =0; i<dna.length(); i++ ) {
+			if (dna.indexOf("ATG") != -1) {
+				startcodon  = dna.indexOf("ATG");	
+				//System.out.println("The starting point is: " + startcodon);
+			}else
+				return -1;
+			}
+
+		
+//Find the index of the first occurrence of the stop codon “TGA” after the first occurrence of “ATG” 
+//that is a multiple of three away from the “ATG”. 
+
+//		int indexFirstOccurrTGA = findStopCodon(dna, "TGA", 0 );
+		
+//	int minIndex = Math.min(indexFirstOccurrTAA, indexFirstOccurrTAG);
+	//int currDist = Math.min(minIndex, indexFirstOccurrTGA);
+	//System.out.println("The stopCodon from findGene is: " + dna.substring(startcodon, currDist +3));
+	int i =0;
+
+	while(currDist != -1) {
+		if(currDist == -1 || i >2) {
+			break;
+		}
+	
+		String str  = codOns[i];
+		
+		//Find the index of the first occurrence of the stop codon “TAA” 
+		//after the first occurrence of “ATG” that is a multiple of three away from the “ATG”. Hint: call findStopCodon.
+
+		currDist = startcodon;
+		int indexFirstOccurr = findStopCodon(dna, str, currDist);
+		in.add(indexFirstOccurr);
+		//Find the index of the first occurrence of the stop codon “TAG” 
+		//after the first occurrence of “ATG” that is a multiple of three away from the “ATG”. 
+		//System.out.println("The stopCodon from findGene is: " + dna.substring(startcodon, currDist +3));
+
+		currDist = 	indexFirstOccurr +1;
+		//startcodon = currDist;
+		i++;
+		count++;
+				
+	}
+	int minVal = Collections.min(in);
+	//System.out.println("The total number of genes is: " + count);
+
+	return count;//dna.substring(startcodon, currDist +3);
+
+}
+	
+	public void testFindGene () {
+		String [] dnaString = new String [1];
+		dnaString[0] ="AATGCTAACTAGCTGACTAAT";
+		/*dnaString [0] = "GCTTAACCGTGACCTTAACGGA";
+		dnaString [1] = "CCGATGCGTCCGTAAACCTG";
+		dnaString [2] = "GCTTAACCGTGACCTTAACGGAATGCCGGTATTCTGAGCGGTGCCGATGCGTCCGTAAACCTGGCCCATGTCCGGCGCTTAGCGCCGT";
+		dnaString [3] = "TTTATGACGCTGTAAAGGCT";
+		dnaString [4] = "ATGCCGGTATTCGAGCGGTG";
+		String dnaWithNoATG = "GCTTAACCGTGACCTTAACGGA";
+		String dnaWithValidGene = "CCGATGCGTCCGTAAACCTG";
+		String dnaWithAtgMultStopCodons = "GCTTAACCGTGACCTTAACGGAATGCCGGTATTCTGAGCGGTGCCGATGCGTCCGTAAACCTGGCCCATGTCCGGCGCTTAGCGCCGT";
+		String dnaWithAtgTaaNotValid  = "TTTATGACGCTGTAAAGGCT";
+		String dnaWithNoTAA = "ATGCCGGTATTCGAGCGGTG";*/
+		//String dnaWithNoATGOrTAA = "GCCCGTCCGGCGCTCGCCGT";
+		
+		for(String str : dnaString) {
+			
+			//System.out.println("The DNA Strings are: " + str);
+			findGene(str);
+			
+			
+		}
+		
+		
+	}
+	
+	public void printAllGenes () {
+		testFindGene ();
+		
+	}
+	public void testCountGenes () {
+	
+	}
+	
+	public static void main(String [] args) {
+		
+		Part3 countGene = new Part3();
+		countGene.printAllGenes();
+		
+	}
+
+
+}
